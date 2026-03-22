@@ -17,3 +17,10 @@ Monster::Monster(std::string name, int hp, int damage)
 Monster::~Monster()
 {
 }
+
+void Monster::abandon()
+{
+    this->name = "none";
+    this->hp = 0;
+    this->damage = 0;
+}

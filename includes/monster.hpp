@@ -13,6 +13,7 @@ class Monster{
     int hp;
     int damage;
     int lvl;
+    void abandon();
 
 
 

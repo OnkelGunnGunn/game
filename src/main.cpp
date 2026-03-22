@@ -3,16 +3,20 @@
 #include "monster.hpp"
 
 enum State{
-    START = 0,
-    EXPLORE = 1,
-    BATTLE = 2,
-    INVENTORY = 3,
-    MONSTER_DETAILS1 = 4,
-    MONSTER_DETAILS2 = 5,
-    MONSTER_DETAILS3 = 6,
-    MONSTER_DETAILS4 = 7
-    
+    START,
+    EXPLORE,
+    BATTLE,
+    INVENTORY,
+    MONSTER_DETAILS1,
+    MONSTER_DETAILS2,
+    MONSTER_DETAILS3,
+    MONSTER_DETAILS4,
+    RENAME,
+    CREATE_CHAR,
+
 };
+
+
 int rng(int min, int max){
     static std::mt19937 generator(std::random_device{}());
     return std::uniform_int_distribution<>(min, max)(generator);
@@ -26,6 +30,7 @@ void print_start_screen(){
     std::cout << "1. Battle" << std::endl;
     std::cout << "2. explore" << std::endl;
     std::cout << "3. check monsters" << std::endl;
+    std::cout << "4. Create new character" << std::endl;
  
 }
 
@@ -56,6 +61,34 @@ void print_monster_details_screen(Monster monster){
     std::cout << monster.name << std::endl;
     std::cout << "Damage: "<< monster.damage << std::endl;
     std::cout << "HP: " << monster.hp << std::endl;
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "1. Rename monster" << std::endl;
+    std::cout << "2. Abandon monster" << std::endl;
+    std::cout << "3. Exit monster details" << std::endl;
+
+}
+
+int evaluate_monster_details_input(int user_input, Monster &monster){
+    int new_state;
+    switch(user_input){
+
+        case 1:
+        new_state = RENAME;
+        break;
+
+        case 2:
+        monster.abandon();
+        new_state = INVENTORY;
+        break;
+
+        case 3:
+        new_state = INVENTORY;
+        break;
+
+
+    }
+    return new_state;
 }
 
 
@@ -73,6 +106,10 @@ int evaluate_start_input(int user_input){
 
         case 3:
         new_state = INVENTORY;
+        break;
+
+        case 4:
+        new_state = CREATE_CHAR;
         break;
 
         default:
@@ -135,8 +172,9 @@ Monster spawn_random_monster(){
 int main(){
     Monster monster1("Hest", 4, 1);
     Monster monster2("Hest", 4, 1);
-    Monster monster3;
-    Monster monster4;
+    Monster monster3("Hest", 4, 1);
+    Monster monster4("Hest", 4, 1);
+    std::string user_name = "Ash";
     int state = START;
     int user_input;
     bool running = true;
@@ -167,18 +205,37 @@ int main(){
 
             case MONSTER_DETAILS1:
             print_monster_details_screen(monster1);
+            user_input = wait_for_user_input();
+            state = evaluate_monster_details_input(user_input, monster1);
             break;
 
             case MONSTER_DETAILS2:
             print_monster_details_screen(monster2);
+            user_input = wait_for_user_input();
+            state = evaluate_monster_details_input(user_input, monster2);
             break;
 
             case MONSTER_DETAILS3:
             print_monster_details_screen(monster3);
+            user_input = wait_for_user_input();
+            state = evaluate_monster_details_input(user_input, monster3);
             break;
 
             case MONSTER_DETAILS4:
             print_monster_details_screen(monster4);
+            user_input = wait_for_user_input();
+            state = evaluate_monster_details_input(user_input, monster4);
+            break;
+
+            case CREATE_CHAR:
+            std::cout << "Type name" << std::endl;
+            std::cin >> user_name;
+            std::cout << "Welcome " << user_name << " to my game" << std::endl;
+            monster1 = Monster("Hest", 4, 1);
+            monster2 = Monster("Hest", 4, 1);
+            monster3.abandon();
+            monster4.abandon();
+            state = START;
             break;
 
             default:

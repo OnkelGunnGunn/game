@@ -1,4 +1,6 @@
 #include <iostream>
+#include <random>
+#include "monster.hpp"
 
 enum State{
     START = 0,
@@ -11,6 +13,11 @@ enum State{
     MONSTER_DETAILS4 = 7
     
 };
+int rng(int min, int max){
+    static std::mt19937 generator(std::random_device{}());
+    return std::uniform_int_distribution<>(min, max)(generator);
+}
+
 
 void print_start_screen(){
     std::cout << "as you travel along in the forest a yellow mouse obstructs your path" << std::endl;
@@ -36,19 +43,21 @@ void print_explore_screen(){
     std::cout << "you continue further" << std::endl;
 }
 
-void print_inventory_screen(){
+void print_inventory_screen(Monster monster1, Monster monster2, Monster monster3, Monster monster4){
     std::cout << "Select monster:" << std::endl;
-    std::cout << "1. pikachu" << std::endl;
-    std::cout << "2. squirtle" << std::endl;
-
+    std::cout << "1." << monster1.name << std::endl;
+    std::cout << "2." << monster2.name << std::endl;
+    std::cout << "3." << monster3.name << std::endl;
+    std::cout << "4." << monster4.name << std::endl;
 }
 
-void print_monster_details_screen(){
+void print_monster_details_screen(Monster monster){
     std::cout << "monster details:" << std::endl;
-    std::cout << "Pikachu  LVL 47"  << std::endl;
-    std::cout << "Damage: 12" << std::endl;
-    std::cout << "HP: 47" << std::endl;
+    std::cout << monster.name << std::endl;
+    std::cout << "Damage: "<< monster.damage << std::endl;
+    std::cout << "HP: " << monster.hp << std::endl;
 }
+
 
 int evaluate_start_input(int user_input){
     int new_state;
@@ -98,9 +107,36 @@ int evaluate_inventory_input(int user_input){
 
 }
 
+Monster spawn_random_monster(){
+    switch(rng(0,7)){
+        case 0:
+            return Monster("Hest", 4, 1);
+        case 1:
+            return Monster("Weak Goblin", 4, 2);
+        case 2:
+            return Monster("Strong Goblin", 8, 3);
+        case 3:
+            return Monster("Stronger Goblin", 10, 4);
+        case 4:
+            return Monster("Den stærkeste Goblin", 15, 5);
+        case 5:
+            return Monster("Abe Kongen", 30, 5);
+        case 6:
+            return Monster("Enhjørning", 50, 8);
+        case 7:
+            return Monster("Drage", 100, 10);
+        default:
+            return Monster("Hest", 4, 1);
+    }
+}
+
 
 
 int main(){
+    Monster monster1("Hest", 4, 1);
+    Monster monster2("Hest", 4, 1);
+    Monster monster3;
+    Monster monster4;
     int state = START;
     int user_input;
     bool running = true;
@@ -124,25 +160,25 @@ int main(){
             break;
 
             case INVENTORY:
-            print_inventory_screen();
+            print_inventory_screen(monster1, monster2, monster3, monster4);
             user_input = wait_for_user_input();
             state = evaluate_inventory_input(user_input);
             break;
 
             case MONSTER_DETAILS1:
-            print_monster_details_screen();
+            print_monster_details_screen(monster1);
             break;
 
             case MONSTER_DETAILS2:
-            print_monster_details_screen();
+            print_monster_details_screen(monster2);
             break;
 
             case MONSTER_DETAILS3:
-            print_monster_details_screen();
+            print_monster_details_screen(monster3);
             break;
 
             case MONSTER_DETAILS4:
-            print_monster_details_screen();
+            print_monster_details_screen(monster4);
             break;
 
             default:

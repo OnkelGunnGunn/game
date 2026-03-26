@@ -13,6 +13,7 @@ enum State{
     MONSTER_DETAILS4,
     RENAME,
     CREATE_CHAR,
+    LEAVE,
 
 };
 
@@ -31,6 +32,7 @@ void print_start_screen(){
     std::cout << "2. explore" << std::endl;
     std::cout << "3. check monsters" << std::endl;
     std::cout << "4. Create new character" << std::endl;
+    std::cout << "69. Leave Game" << std::endl;
  
 }
 
@@ -54,6 +56,8 @@ void print_inventory_screen(Monster monster1, Monster monster2, Monster monster3
     std::cout << "2." << monster2.name << std::endl;
     std::cout << "3." << monster3.name << std::endl;
     std::cout << "4." << monster4.name << std::endl;
+    std::cout << std::endl;
+    std::cout << "press 0 to exit inventory" << std::endl;
 }
 
 void print_monster_details_screen(Monster monster){
@@ -112,6 +116,10 @@ int evaluate_start_input(int user_input){
         new_state = CREATE_CHAR;
         break;
 
+        case 69:
+        new_state = LEAVE;
+        break;
+
         default:
         new_state = START;
         break;
@@ -123,6 +131,10 @@ int evaluate_inventory_input(int user_input){
     int new_state;
     switch(user_input){
 
+        case 0:
+        new_state = START;
+        break;
+        
         case 1:
         new_state = MONSTER_DETAILS1;
         break;
@@ -138,6 +150,9 @@ int evaluate_inventory_input(int user_input){
         case 4:
         new_state = MONSTER_DETAILS4;
         break;
+
+        default:
+        new_state = INVENTORY;
 
     }
     return new_state;
@@ -172,8 +187,8 @@ Monster spawn_random_monster(){
 int main(){
     Monster monster1("Hest", 4, 1);
     Monster monster2("Hest", 4, 1);
-    Monster monster3("Hest", 4, 1);
-    Monster monster4("Hest", 4, 1);
+    Monster monster3;
+    Monster monster4;
     std::string user_name = "Ash";
     int state = START;
     int user_input;
@@ -230,7 +245,7 @@ int main(){
             case CREATE_CHAR:
             std::cout << "Type name" << std::endl;
             std::cin >> user_name;
-            std::cout << "Welcome " << user_name << " to my game" << std::endl;
+            std::cout << "Welcome " << user_name << " to my game: NotPokémon" << std::endl;
             monster1 = Monster("Hest", 4, 1);
             monster2 = Monster("Hest", 4, 1);
             monster3.abandon();
@@ -238,8 +253,18 @@ int main(){
             state = START;
             break;
 
+            case LEAVE:
+            std::cout << std::endl;
+            std::cout << std::endl;
+            std::cout << std::endl;
+            std::cout << "bai bai" << std::endl;
+            running = false;
+            break;
+
             default:
             std::cout << "sumting wong" << std::endl;
+            running = false;
+            break;
 
         }
         

@@ -2,7 +2,12 @@
 #include <random>
 #include "monster.hpp"
 
-enum State{
+enum TurnOwner{
+    PC,
+    OPPONENT
+};
+
+enum MenuState{
     START,
     EXPLORE,
     BATTLE,
@@ -14,6 +19,7 @@ enum State{
     RENAME,
     CREATE_CHAR,
     LEAVE,
+
 
 };
 
@@ -94,7 +100,6 @@ int evaluate_monster_details_input(int user_input, Monster &monster){
     }
     return new_state;
 }
-
 
 int evaluate_start_input(int user_input){
     int new_state;
@@ -182,10 +187,43 @@ Monster spawn_random_monster(){
     }
 }
 
+void battle_mechanics(Monster player, Monster opponent){
+    int dead = 0;
+    int opp_hp = opponent.hp;
+    int opp_dmg = opponent.damage;
+    int pc_hp = player.hp;
+    int pc_dmg = player.damage;
+    //int user_input;
+    bool battle = true;
+    TurnOwner turn = static_cast<TurnOwner>(rng(0,1));
 
+    while(battle){
+        switch(turn){
+
+            case PC:
+            opp_hp = opp_hp - pc_dmg;
+            if(opp_hp == dead){
+                std::cout << "you won!" << std::endl;
+                battle = false;
+            } else{
+                turn = OPPONENT;
+            }
+
+            case OPPONENT:
+            pc_hp = pc_hp - opp_dmg;
+            if(pc_hp == dead){
+                std::cout << "You lost" << std::endl;
+            } else{
+                turn = PC;
+            }
+
+        }
+    }
+
+}
 
 int main(){
-    Monster monster1("Hest", 4, 1);
+    Monster monster1("Hest", 4, 2);
     Monster monster2("Hest", 4, 1);
     Monster monster3;
     Monster monster4;
@@ -205,7 +243,8 @@ int main(){
             break;
 
             case BATTLE:
-            print_battle_screen();
+            //print_battle_screen();
+            battle_mechanics(monster1, monster2);
             break;
 
             case EXPLORE:

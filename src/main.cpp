@@ -1,11 +1,8 @@
 #include <iostream>
 #include <random>
-#include "monster.hpp"
-
-enum TurnOwner{
-    PC,
-    OPPONENT
-};
+#include <memory>
+#include <vector>
+#include "state.hpp"
 
 enum MenuState{
     START,
@@ -24,13 +21,31 @@ enum MenuState{
 };
 
 
-int rng(int min, int max){
-    static std::mt19937 generator(std::random_device{}());
-    return std::uniform_int_distribution<>(min, max)(generator);
-}
+class State{
+    private:
 
 
-void print_start_screen(){
+    public:
+    virtual ~State() = default;
+    virtual void on_entry() = 0;
+    virtual int evaluate_user_input(int) = 0;
+
+
+
+};
+
+class startState : public State{
+    private:
+
+
+    public:
+    void on_entry() override;
+    int evaluate_user_input(int) override;
+};
+
+
+void startState::on_entry()
+{
     std::cout << "as you travel along in the forest a yellow mouse obstructs your path" << std::endl;
     std::cout << std::endl;
     std::cout << "which action do you want to take" << std::endl;
@@ -39,69 +54,10 @@ void print_start_screen(){
     std::cout << "3. check monsters" << std::endl;
     std::cout << "4. Create new character" << std::endl;
     std::cout << "69. Leave Game" << std::endl;
- 
 }
 
-int wait_for_user_input(){
-    int user_input;
-    std::cin >> user_input;
-    return user_input;
-}
-
-void print_battle_screen(){
-    std::cout << "get ready to rumble" << std::endl;
-}
-
-void print_explore_screen(){
-    std::cout << "you continue further" << std::endl;
-}
-
-void print_inventory_screen(Monster monster1, Monster monster2, Monster monster3, Monster monster4){
-    std::cout << "Select monster:" << std::endl;
-    std::cout << "1." << monster1.name << std::endl;
-    std::cout << "2." << monster2.name << std::endl;
-    std::cout << "3." << monster3.name << std::endl;
-    std::cout << "4." << monster4.name << std::endl;
-    std::cout << std::endl;
-    std::cout << "press 0 to exit inventory" << std::endl;
-}
-
-void print_monster_details_screen(Monster monster){
-    std::cout << "monster details:" << std::endl;
-    std::cout << monster.name << std::endl;
-    std::cout << "Damage: "<< monster.damage << std::endl;
-    std::cout << "HP: " << monster.hp << std::endl;
-    std::cout << std::endl;
-    std::cout << std::endl;
-    std::cout << "1. Rename monster" << std::endl;
-    std::cout << "2. Abandon monster" << std::endl;
-    std::cout << "3. Exit monster details" << std::endl;
-
-}
-
-int evaluate_monster_details_input(int user_input, Monster &monster){
-    int new_state;
-    switch(user_input){
-
-        case 1:
-        new_state = RENAME;
-        break;
-
-        case 2:
-        monster.abandon();
-        new_state = INVENTORY;
-        break;
-
-        case 3:
-        new_state = INVENTORY;
-        break;
-
-
-    }
-    return new_state;
-}
-
-int evaluate_start_input(int user_input){
+int startState::evaluate_user_input(int user_input)
+{
     int new_state;
     switch(user_input){
         
@@ -130,184 +86,18 @@ int evaluate_start_input(int user_input){
         break;
     }
     return new_state;
+    
 }
 
-int evaluate_inventory_input(int user_input){
-    int new_state;
-    switch(user_input){
-
-        case 0:
-        new_state = START;
-        break;
-        
-        case 1:
-        new_state = MONSTER_DETAILS1;
-        break;
-
-        case 2:
-        new_state = MONSTER_DETAILS2;
-        break;
-        
-        case 3:
-        new_state = MONSTER_DETAILS3;
-        break;
-
-        case 4:
-        new_state = MONSTER_DETAILS4;
-        break;
-
-        default:
-        new_state = INVENTORY;
-
-    }
-    return new_state;
-
-}
-
-Monster spawn_random_monster(){
-    switch(rng(0,7)){
-        case 0:
-            return Monster("Hest", 4, 1);
-        case 1:
-            return Monster("Weak Goblin", 4, 2);
-        case 2:
-            return Monster("Strong Goblin", 8, 3);
-        case 3:
-            return Monster("Stronger Goblin", 10, 4);
-        case 4:
-            return Monster("Den stærkeste Goblin", 15, 5);
-        case 5:
-            return Monster("Abe Kongen", 30, 5);
-        case 6:
-            return Monster("Enhjørning", 50, 8);
-        case 7:
-            return Monster("Drage", 100, 10);
-        default:
-            return Monster("Hest", 4, 1);
-    }
-}
-
-void battle_mechanics(Monster player, Monster opponent){
-    int dead = 0;
-    int opp_hp = opponent.hp;
-    int opp_dmg = opponent.damage;
-    int pc_hp = player.hp;
-    int pc_dmg = player.damage;
-    //int user_input;
-    bool battle = true;
-    TurnOwner turn = static_cast<TurnOwner>(rng(0,1));
-
-    while(battle){
-        switch(turn){
-
-            case PC:
-            opp_hp = opp_hp - pc_dmg;
-            if(opp_hp == dead){
-                std::cout << "you won!" << std::endl;
-                battle = false;
-            } else{
-                turn = OPPONENT;
-            }
-
-            case OPPONENT:
-            pc_hp = pc_hp - opp_dmg;
-            if(pc_hp == dead){
-                std::cout << "You lost" << std::endl;
-            } else{
-                turn = PC;
-            }
-
-        }
-    }
-
-}
 
 int main(){
-    Monster monster1("Hest", 4, 2);
-    Monster monster2("Hest", 4, 1);
-    Monster monster3;
-    Monster monster4;
-    std::string user_name = "Ash";
-    int state = START;
+    std::vector<std::unique_ptr<State>> states;
+    states.push_back(std::make_unique<startState>());
+
+    states[0]->on_entry();
+
     int user_input;
-    bool running = true;
-
-    while(running)
-    {
-        switch(state)
-        {
-            case START:
-            print_start_screen();
-            user_input = wait_for_user_input();
-            state = evaluate_start_input(user_input);
-            break;
-
-            case BATTLE:
-            //print_battle_screen();
-            battle_mechanics(monster1, monster2);
-            break;
-
-            case EXPLORE:
-            print_explore_screen();
-            break;
-
-            case INVENTORY:
-            print_inventory_screen(monster1, monster2, monster3, monster4);
-            user_input = wait_for_user_input();
-            state = evaluate_inventory_input(user_input);
-            break;
-
-            case MONSTER_DETAILS1:
-            print_monster_details_screen(monster1);
-            user_input = wait_for_user_input();
-            state = evaluate_monster_details_input(user_input, monster1);
-            break;
-
-            case MONSTER_DETAILS2:
-            print_monster_details_screen(monster2);
-            user_input = wait_for_user_input();
-            state = evaluate_monster_details_input(user_input, monster2);
-            break;
-
-            case MONSTER_DETAILS3:
-            print_monster_details_screen(monster3);
-            user_input = wait_for_user_input();
-            state = evaluate_monster_details_input(user_input, monster3);
-            break;
-
-            case MONSTER_DETAILS4:
-            print_monster_details_screen(monster4);
-            user_input = wait_for_user_input();
-            state = evaluate_monster_details_input(user_input, monster4);
-            break;
-
-            case CREATE_CHAR:
-            std::cout << "Type name" << std::endl;
-            std::cin >> user_name;
-            std::cout << "Welcome " << user_name << " to my game: NotPokémon" << std::endl;
-            monster1 = Monster("Hest", 4, 1);
-            monster2 = Monster("Hest", 4, 1);
-            monster3.abandon();
-            monster4.abandon();
-            state = START;
-            break;
-
-            case LEAVE:
-            std::cout << std::endl;
-            std::cout << std::endl;
-            std::cout << std::endl;
-            std::cout << "bai bai" << std::endl;
-            running = false;
-            break;
-
-            default:
-            std::cout << "sumting wong" << std::endl;
-            running = false;
-            break;
-
-        }
-        
-    }
-
+    std::cin >> user_input;
+    int next_state = states[0]->evaluate_user_input(user_input);
+    std::cout << "Next state is " << next_state << std::endl;
 }
-

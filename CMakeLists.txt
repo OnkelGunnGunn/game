@@ -4,7 +4,7 @@ project(game LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(game src/main.cpp src/monster.cpp)
+add_executable(game src/main.cpp src/monster.cpp src/start_state.cpp)
 
 
 target_include_directories(game PRIVATE includes)

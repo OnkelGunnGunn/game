@@ -23,7 +23,6 @@ void startState::on_entry()
 int startState::evaluate_user_input(int user_input)
 {
     int new_state;
-    //std::cin >> user_input;
     switch(user_input){
         
         case 1:

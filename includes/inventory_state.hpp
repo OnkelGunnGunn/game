@@ -5,7 +5,12 @@
 #include "state.hpp"
 #include "monster.hpp"
 
-
+enum MonsterDETAILS{
+    MONSTER_DETAILS1,
+    MONSTER_DETAILS2,
+    MONSTER_DETAILS3,
+    MONSTER_DETAILS4,
+};
 
 class InventoryState : public State{
 

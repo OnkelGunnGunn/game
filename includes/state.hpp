@@ -1,5 +1,6 @@
 #ifndef STATE_H
 #define STATE_H
+#include <iostream>
 
 enum MenuState{
     START,
@@ -18,6 +19,7 @@ class State{
 
 
     public:
+    void clear_screen();
     virtual ~State() = default;
     virtual void on_entry() = 0;
     virtual int evaluate_user_input(int) = 0;

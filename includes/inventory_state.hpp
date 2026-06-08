@@ -5,11 +5,10 @@
 #include "state.hpp"
 #include "monster.hpp"
 
-enum MonsterDETAILS{
-    MONSTER_DETAILS1,
-    MONSTER_DETAILS2,
-    MONSTER_DETAILS3,
-    MONSTER_DETAILS4,
+enum InventoryOptions{
+    SWAP,
+    ITEM,
+    EXIT_INV,
 };
 
 class InventoryState : public State{
@@ -22,7 +21,7 @@ class InventoryState : public State{
     InventoryState();
     void on_entry() override;
     int evaluate_user_input(int) override;
-    void swap_monsters(int, int);
+    void swap_monsters();
     
 
 };

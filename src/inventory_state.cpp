@@ -9,64 +9,72 @@ InventoryState::InventoryState()
     monsters.push_back(Monster("none", 0, 0));
 }
 
+
 void InventoryState::on_entry()
 {
-    std::cout << "Select monster:" << std::endl;
-    std::cout << "1." << monsters[0].name << std::endl;
-    std::cout << "2." << monsters[1].name << std::endl;
-    std::cout << "3." << monsters[2].name << std::endl;
-    std::cout << "4." << monsters[3].name << std::endl;
-    std::cout << std::endl;
-    std::cout << "press 5 to exit inventory" << std::endl;
-    
-
-}
-
-int InventoryState::evaluate_user_input(int user_input)
-{
-    // Select swap so that the order in which the monsters are can be altered
-    int a, b;
-
-    switch (user_input)
-    {
-    case 1:
-        std::cout << "choose option 1" << std::endl;
-        std::cin >> a;
-        std::cout << "choose option 2" << std::endl;
-        std::cin >> b;
-        swap_monsters(a - 1, b - 1);
-        return INVENTORY;
-        break;
-    
-    default:
-        break;
-    }
-    return 0;
-}
-
-void InventoryState::swap_monsters(int i, int j)
-{
-    bool swapping = true;
-    
-    while(swapping){
-        // std::cout << "Choose Monster to swap" << std::endl;
-        // std::cin >> i;
-        // std::cout << "Choose " << monsters[i].name << " new position" << std::endl;
-        // std::cin >> j;
-        std::swap(monsters[i], monsters[j]);
-        swapping = false;
-        if(i == 9 or j == 9){
-            swapping = false;
-        }
-    }
+    clear_screen();
+    std::cout << "Monsters in your Party" << std::endl;
     for (size_t i = 0; i < monsters.size(); ++i)
     {
         std::cout << i + 1 << ". " << monsters[i].name << std::endl;
     }
+
+    std::cout << "Choose option:" << std::endl;  
+    std::cout << "0. Swap order of monsters      1. Give Item to monster       2. Leave inventory" << std::endl;
+}
+
+
+int InventoryState::evaluate_user_input(int user_input)
+{
+    // Select swap so that the order in which the monsters are can be altered
+
+
+
+    switch (user_input){
+        case SWAP:
+            swap_monsters();
+            return INVENTORY;
+            break;
+        
+        // case 2 item
+
+        case EXIT_INV:
+        return START;
+
+        default:
+            break;
+    }
+    return 0;
+}
+
+void InventoryState::swap_monsters()
+{
+    bool swapping = true;
+    int i;
+    int j;
+
+    while(swapping){
+        if(i == 9 or j == 9){
+            std::cout << "Swapping cancelled" << std::endl;
+            swapping = false;
+        }
+        else{
+        std::cout << "monster 1" << std::endl;
+        std::cin >> i;
+        std::cout << "monster 2" << std::endl;
+        std::cin >> j;
+
+        std::swap(monsters[i-1], monsters[j-1]);
+        swapping = false;
+        }
     
-    // std::cout << "Choose Monster to swap" << std::endl;
-    // std::cin >> i;
-    // std::cout << "Choose " << monsters[i].name << " new position" << std::endl;
-    // std::cin >> j;
-    // std::swap(monsters[i], monsters[j]);
+
+
+    std::cout << "New Monster order:" << std::endl;
+    for (size_t i = 0; i < monsters.size(); ++i)
+    {
+        std::cout << i << ". " << monsters[i].name << std::endl;
+    }
+    
+}
 }

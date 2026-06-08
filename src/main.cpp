@@ -5,17 +5,20 @@
 #include "state.hpp"
 #include "start_state.hpp"
 #include "inventory_state.hpp"
+#include "create_char_state.hpp"
 
 
 int main(){
 
+    GameData data;
+
     std::vector<std::unique_ptr<State>> states(LEAVE + 1);
 
-    states[START]        = std::make_unique<startState>();
-    states[INVENTORY]    = std::make_unique<InventoryState>();
-    states[BATTLE]       = std::make_unique<startState>();   // temp
-    states[EXPLORE]      = std::make_unique<startState>();   // temp
-    states[CREATE_CHAR]  = std::make_unique<startState>();   // temp
+    states[START]             = std::make_unique<startState>(data);
+    states[INVENTORY]         = std::make_unique<InventoryState>(data);
+    // states[BATTLE]            = std::make_unique<startState>(data);   // temp
+    // states[EXPLORE]           = std::make_unique<startState>(data);   // temp
+    states[CREATE_CHARACTER]  = std::make_unique<CreateCharacterState>(data);
 
     int current_state = START;
 

@@ -1,12 +1,8 @@
 #include "inventory_state.hpp"
 #include <iostream>
 
-InventoryState::InventoryState()
+InventoryState::InventoryState(GameData &data) : data(data)
 {
-    monsters.push_back(Monster("horse1", 4, 1));
-    monsters.push_back(Monster("horse2", 4, 1));
-    monsters.push_back(Monster("none", 0, 0));
-    monsters.push_back(Monster("none", 0, 0));
 }
 
 
@@ -14,9 +10,9 @@ void InventoryState::on_entry()
 {
     clear_screen();
     std::cout << "Monsters in your Party" << std::endl;
-    for (size_t i = 0; i < monsters.size(); ++i)
+    for (size_t i = 0; i < data.monsters.size(); ++i)
     {
-        std::cout << i + 1 << ". " << monsters[i].name << std::endl;
+        std::cout << i + 1 << ". " << data.monsters[i].name << std::endl;
     }
 
     std::cout << "Choose option:" << std::endl;  
@@ -64,16 +60,16 @@ void InventoryState::swap_monsters()
         std::cout << "monster 2" << std::endl;
         std::cin >> j;
 
-        std::swap(monsters[i-1], monsters[j-1]);
+        std::swap(data.monsters[i-1], data.monsters[j-1]);
         swapping = false;
         }
     
 
 
     std::cout << "New Monster order:" << std::endl;
-    for (size_t i = 0; i < monsters.size(); ++i)
+    for (size_t i = 0; i < data.monsters.size(); ++i)
     {
-        std::cout << i << ". " << monsters[i].name << std::endl;
+        std::cout << i << ". " << data.monsters[i].name << std::endl;
     }
     
 }

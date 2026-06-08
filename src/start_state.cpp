@@ -4,19 +4,27 @@
 #include <vector>
 #include "state.hpp"
 #include "start_state.hpp"
+#include "create_char_state.hpp"
 
-
-
+startState::startState(GameData &data) : data(data)
+{
+    data.player_name = "Default Player";
+    data.monsters.push_back(Monster("horse1", 4, 1));
+    data.monsters.push_back(Monster("horse2", 4, 1));
+    data.monsters.push_back(Monster("none", 0, 0));
+    data.monsters.push_back(Monster("none", 0, 0));
+}
 
 void startState::on_entry()
 {
-    std::cout << "as you travel along in the forest a yellow mouse obstructs your path" << std::endl;
+    clear_screen();
+    std::cout << "Hello " << data.player_name << std::endl;
     std::cout << std::endl;
     std::cout << "which action do you want to take" << std::endl;
     std::cout << "1. Battle" << std::endl;
     std::cout << "2. explore" << std::endl;
     std::cout << "3. check monsters" << std::endl;
-    std::cout << "4. Create new character" << std::endl;
+    std::cout << "5. Create new character" << std::endl;
     std::cout << "69. Leave Game" << std::endl;
 }
 
@@ -37,8 +45,8 @@ int startState::evaluate_user_input(int user_input)
         new_state = INVENTORY;
         break;
 
-        case 4:
-        new_state = CREATE_CHAR;
+        case 5:
+        new_state = CREATE_CHARACTER;
         break;
 
         case 69:

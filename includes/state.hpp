@@ -7,8 +7,7 @@ enum MenuState{
     EXPLORE,
     BATTLE,
     INVENTORY,
-    RENAME,
-    CREATE_CHAR,
+    CREATE_CHARACTER,
     LEAVE,
 
 

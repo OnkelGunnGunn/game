@@ -10,6 +10,7 @@ add_executable(game
     src/state.cpp
     src/start_state.cpp
     src/inventory_state.cpp
+    src/create_char_state.cpp
     )
 
 

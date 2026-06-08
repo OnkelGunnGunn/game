@@ -4,6 +4,7 @@
 #include <vector>
 #include "state.hpp"
 #include "monster.hpp"
+#include "game_data.hpp"
 
 enum InventoryOptions{
     SWAP,
@@ -14,11 +15,11 @@ enum InventoryOptions{
 class InventoryState : public State{
 
     private:
-    std::vector<Monster> monsters;
+    GameData& data;
 
 
     public:
-    InventoryState();
+    InventoryState(GameData& data);
     void on_entry() override;
     int evaluate_user_input(int) override;
     void swap_monsters();

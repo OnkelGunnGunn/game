@@ -21,4 +21,10 @@ std::vector<Monster> &Player::get_monsters()
 
 void Player::add_monster(const Monster &m)
 {
+    monsters.push_back(m);
+}
+
+void Player::clear_monsters()
+{
+    monsters.clear();
 }

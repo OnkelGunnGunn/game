@@ -1,6 +1,6 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
-#include "game_data.hpp"
+
 #include <vector>
 #include "monster.hpp"
 
@@ -20,9 +20,7 @@ class Player{
 
     std::vector<Monster>& get_monsters();
     void add_monster(const Monster& m);
-
-
-
+    void clear_monsters();
 
 };
 

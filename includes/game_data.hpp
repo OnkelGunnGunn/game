@@ -4,10 +4,10 @@
 #include <string>
 #include <vector>
 #include "monster.hpp"
+#include "player.hpp"
 
 struct GameData {
-    std::string player_name;
-    std::vector<Monster> monsters;
+    Player player;
 };
 
 #endif

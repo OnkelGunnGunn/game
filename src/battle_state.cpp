@@ -1,6 +1,7 @@
 #include "battle_state.hpp"
 #include "player.hpp"
 #include "npc.hpp"
+#include "monster.hpp"
 #include <iostream>
 
 
@@ -19,3 +20,5 @@ int BattleState::evaluate_user_input(int)
 
     return 0;
 }
+
+

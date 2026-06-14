@@ -1,6 +1,5 @@
 #ifndef NPC_HPP
 #define NPC_HPP
-#include "game_data.hpp"
 #include "monster.hpp"
 #include <vector>
 #include <iostream>

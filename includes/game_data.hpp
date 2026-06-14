@@ -5,9 +5,11 @@
 #include <vector>
 #include "monster.hpp"
 #include "player.hpp"
+#include "npc.hpp"
 
 struct GameData {
     Player player;
+    Npc current_enemy;
 };
 
 #endif

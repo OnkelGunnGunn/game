@@ -4,6 +4,7 @@
 #include "state.hpp"
 #include "monster.hpp"
 #include "game_data.hpp"
+#include "npc.hpp"
 
 enum ExploreOptions{
     WILD_ENCOUNTER1 = 1,
@@ -27,7 +28,7 @@ class ExploreState : public State{
     void on_entry() override;
     int evaluate_user_input(int) override;
     Monster random_monster();
-    Monster get_monster(int i) const;
+    Monster get_monster() const;
     void generate_random_encounters();
 
 

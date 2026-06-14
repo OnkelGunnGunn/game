@@ -20,3 +20,7 @@ add_executable(game
 
 target_include_directories(game PRIVATE includes)
 
+find_package(SQLite3 REQUIRED)
+
+target_link_libraries(game PRIVATE sqlite3)
+

@@ -27,3 +27,8 @@ std::string Npc::get_name() const
 {
     return name;
 }
+
+std::vector<Monster> &Npc::get_all_monsters()
+{
+    return monsters;
+}

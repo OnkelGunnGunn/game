@@ -8,8 +8,8 @@
 
 startState::startState(GameData &data) : data(data)
 {
-    data.player.add_monster(Monster("horse1", 4, 1));
-    data.player.add_monster(Monster("horse2", 4, 1));
+    data.player.add_monster(Monster("Player's HEST 1", 4, 0));
+    data.player.add_monster(Monster("player's HEST 2", 4, 1));
     data.player.add_monster(Monster("none",0 ,0));
     data.player.add_monster(Monster("none",0 ,0));
     

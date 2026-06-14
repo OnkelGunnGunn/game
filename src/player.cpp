@@ -14,9 +14,14 @@ std::string Player::get_name() const
     return std::string(name);
 }
 
-std::vector<Monster> &Player::get_monsters()
+std::vector<Monster> &Player::get_all_monsters()
 {
     return monsters;
+}
+
+Monster &Player::get_monster(int i)
+{
+    return monsters[i];
 }
 
 void Player::add_monster(const Monster &m)

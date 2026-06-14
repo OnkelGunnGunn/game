@@ -9,3 +9,9 @@ void State::clear_screen()
 {
     std::cout << "\033[2J\033[1;1H" << std::flush;
 }
+
+void State::spacing()
+{
+    std::cout << std::endl;
+    std::cout << std::endl;
+}

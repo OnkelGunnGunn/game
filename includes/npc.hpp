@@ -17,6 +17,7 @@ class Npc{
     void add_monster(const Monster& m);
     void print_monsters() const;
     std::string get_name() const;
+    std::vector<Monster>& get_all_monsters();
 
 
 };

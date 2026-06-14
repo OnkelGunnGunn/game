@@ -7,6 +7,7 @@
 #include "inventory_state.hpp"
 #include "create_char_state.hpp"
 #include "ExploreState.hpp"
+#include "battle_state.hpp"
 
 
 int main(){
@@ -17,7 +18,7 @@ int main(){
 
     states[START]             = std::make_unique<startState>(data);
     states[INVENTORY]         = std::make_unique<InventoryState>(data);
-    // states[BATTLE]            = std::make_unique<startState>(data);   // temp
+    states[BATTLE]            = std::make_unique<BattleState>(data); 
     states[EXPLORE]           = std::make_unique<ExploreState>(data); 
     states[CREATE_CHARACTER]  = std::make_unique<CreateCharacterState>(data);
 

@@ -21,6 +21,7 @@ class State{
     public:
     int rng(int, int);
     void clear_screen();
+    void spacing();
     virtual ~State() = default;
     virtual void on_entry() = 0;
     virtual int evaluate_user_input(int) = 0;

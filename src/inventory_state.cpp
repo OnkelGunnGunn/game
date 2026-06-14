@@ -12,9 +12,9 @@ void InventoryState::on_entry()
 {
     clear_screen();
     std::cout << "Monsters in your Party" << std::endl;
-    for (size_t i = 0; i < data.player.get_monsters().size(); ++i)
+    for (size_t i = 0; i < data.player.get_all_monsters().size(); ++i)
     {
-        std::cout << i + 1 << ". " << data.player.get_monsters()[i].name << std::endl;
+        std::cout << i + 1 << ". " << data.player.get_all_monsters()[i].name << std::endl;
     }
 
     std::cout << "Choose option:" << std::endl;  
@@ -62,16 +62,16 @@ void InventoryState::swap_monsters()
         std::cout << "monster 2" << std::endl;
         std::cin >> j;
 
-        std::swap(data.player.get_monsters()[i-1], data.player.get_monsters()[j-1]);
+        std::swap(data.player.get_all_monsters()[i-1], data.player.get_all_monsters()[j-1]);
         swapping = false;
         }
     
 
 
     std::cout << "New Monster order:" << std::endl;
-    for (size_t i = 0; i < data.player.get_monsters().size(); ++i)
+    for (size_t i = 0; i < data.player.get_all_monsters().size(); ++i)
     {
-        std::cout << i << ". " << data.player.get_monsters()[i].name << std::endl;
+        std::cout << i << ". " << data.player.get_all_monsters()[i].name << std::endl;
     }
     
 }

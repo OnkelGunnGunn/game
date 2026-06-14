@@ -1,5 +1,5 @@
-#ifndef INVENTORY_STATE_H
-#define INVENTORY_STATE_H
+#ifndef INVENTORY_STATE_HPP
+#define INVENTORY_STATE_HPP
 
 #include <vector>
 #include "state.hpp"

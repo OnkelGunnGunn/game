@@ -1,6 +1,9 @@
 #include "state.hpp"
 
-
+int State::rng(int min, int max){
+    static std::mt19937 generator(std::random_device{}());
+    return std::uniform_int_distribution<>(min, max)(generator);
+}
 
 void State::clear_screen()
 {

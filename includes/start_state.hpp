@@ -1,5 +1,5 @@
-#ifndef START_STATE_H
-#define START_STATE_H
+#ifndef START_STATE_HPP
+#define START_STATE_HPP
 
 #include "state.hpp"
 #include "game_data.hpp"

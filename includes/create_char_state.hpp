@@ -1,5 +1,5 @@
-#ifndef CREATE_CHAR
-#define CREATE_CHAR
+#ifndef CREATE_CHAR_HPP
+#define CREATE_CHAR_HPP
 #include "state.hpp"
 #include "game_data.hpp"
 #include "monster.hpp"

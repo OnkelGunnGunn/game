@@ -13,6 +13,7 @@ class Npc{
 
 
     public:
+    Npc();
     Npc(const std::string& input_name);
     void add_monster(const Monster& m);
     void print_monsters() const;

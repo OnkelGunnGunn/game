@@ -1,5 +1,5 @@
-#ifndef MONSTER_H
-#define MONSTER_H
+#ifndef MONSTER_HPP
+#define MONSTER_HPP
 #include <iostream>
 
 
@@ -15,6 +15,8 @@ class Monster{
     int hp;
     int damage;
     int lvl;
+    // struct item?
+    // int challenge_rating
     void abandon();
 
 };

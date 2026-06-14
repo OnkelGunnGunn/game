@@ -1,6 +1,7 @@
-#ifndef STATE_H
-#define STATE_H
+#ifndef STATE_HPP
+#define STATE_HPP
 #include <iostream>
+#include <random>
 
 enum MenuState{
     START,
@@ -18,6 +19,7 @@ class State{
 
 
     public:
+    int rng(int, int);
     void clear_screen();
     virtual ~State() = default;
     virtual void on_entry() = 0;

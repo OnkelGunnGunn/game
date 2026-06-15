@@ -18,6 +18,7 @@ class Npc{
     void print_monsters() const;
     std::string get_name() const;
     std::vector<Monster>& get_all_monsters();
+    void set_vector_size(int size);
 
 
 };

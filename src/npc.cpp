@@ -2,12 +2,10 @@
 
 Npc::Npc(const std::string& input_name) : name(input_name)
 {
-    monsters.push_back(Monster("Horse", 4, 1));
 }
 
 Npc::Npc() : name("Default NPC")
 {
-    monsters.push_back(Monster("Horse", 4, 1));
 }
 
 void Npc::add_monster(const Monster &m)
@@ -31,4 +29,9 @@ std::string Npc::get_name() const
 std::vector<Monster> &Npc::get_all_monsters()
 {
     return monsters;
+}
+
+void Npc::set_vector_size(int size)
+{
+    monsters.resize(size);
 }

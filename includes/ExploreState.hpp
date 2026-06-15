@@ -13,6 +13,11 @@ enum ExploreOptions{
     EXIT_EXPLORE = 4,
 };
 
+struct MonsterSpawnRates{
+    Monster monster;
+    int weight;
+};
+
 
 class ExploreState : public State{
 
@@ -27,8 +32,8 @@ class ExploreState : public State{
     ExploreState(GameData& data);
     void on_entry() override;
     int evaluate_user_input(int) override;
-    Monster random_monster();
     Monster get_monster() const;
+    Monster weighted_random_monster();
     void generate_random_encounters();
 
 

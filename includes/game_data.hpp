@@ -10,6 +10,8 @@
 struct GameData {
     Player player;
     Npc current_enemy;
+    Monster loot_monster;
+    bool can_catch = false;
 };
 
 #endif

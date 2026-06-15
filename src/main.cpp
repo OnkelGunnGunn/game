@@ -8,6 +8,7 @@
 #include "create_char_state.hpp"
 #include "ExploreState.hpp"
 #include "battle_state.hpp"
+#include "catch_state.hpp"
 
 
 int main(){
@@ -21,6 +22,7 @@ int main(){
     states[BATTLE]            = std::make_unique<BattleState>(data); 
     states[EXPLORE]           = std::make_unique<ExploreState>(data); 
     states[CREATE_CHARACTER]  = std::make_unique<CreateCharacterState>(data);
+    states[CATCH]             = std::make_unique<CatchState>(data);
 
     int current_state = START;
 

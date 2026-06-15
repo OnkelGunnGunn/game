@@ -3,15 +3,14 @@
 #include <iostream>
 #include <random>
 
-enum MenuState{
+enum States{
     START,
     EXPLORE,
     BATTLE,
     INVENTORY,
     CREATE_CHARACTER,
     LEAVE,
-
-
+    CATCH,
 };
 
 class State{

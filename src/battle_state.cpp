@@ -30,7 +30,7 @@ int BattleState::evaluate_user_input(int user_input)
     
 
     case LEAVE_BATTLE_ENTRY:
-        new_state = LEAVE;
+        new_state = START;
     break;
     
 
@@ -62,8 +62,7 @@ void BattleState::print_actions()
 {
     std::cout << "Choose what action " << data.player.get_monster(0).name << " should take!" << std::endl;
     std::cout << "1. Attack " << data.current_enemy.get_name() << std::endl;
-    std::cout << "2. Switch" << std::endl;
-    std::cout << "3. Leave battle" << std::endl;
+    std::cout << "2. Leave battle" << std::endl;
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << std::endl;
@@ -123,20 +122,24 @@ int BattleState::battle()
 
 
                 
-                if (enemy_monsters[i_enemy].hp <= dead)   // Make into a function?
+                if (enemy_monsters[i_enemy].hp <= dead)
                 {
                     std::cout << enemy_monsters[i_enemy].name
                             << " has been defeated!" << std::endl;
 
-                    i_enemy++;
+                 
+                    data.loot_monster = enemy_monsters[i_enemy];
+                    data.can_catch = true;
 
-                    if (i_enemy >= enemy_monsters.size())
+                   
+                    if (i_enemy == enemy_monsters.size() - 1)
                     {
-                        std::cout << "All enemy monsters defeated!\n";
-                        new_state = START;
-                        fighting = false;
-                        break;   
+                        std::cout << "All enemy monsters defeated!" << std::endl;
+                        return CATCH;
+                           
                     }
+
+                    i_enemy++;
                 }
                 else
                 {
@@ -146,7 +149,7 @@ int BattleState::battle()
             }
 
             case RUN:
-                new_state = LEAVE;
+                new_state = START;
                 fighting = false;
                 break;
 

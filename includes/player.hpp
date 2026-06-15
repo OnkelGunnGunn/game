@@ -11,6 +11,7 @@ class Player{
     private:
     std::string name;
     std::vector<Monster> monsters;
+    std::vector<Item> item_inventory;
 
 
     public:
@@ -22,6 +23,10 @@ class Player{
     Monster& get_monster(int i);
     void add_monster(const Monster& m);
     void clear_monsters();
+
+    void add_item(const Item& item);
+    std::vector<Item>& get_inventory();
+
 
 };
 

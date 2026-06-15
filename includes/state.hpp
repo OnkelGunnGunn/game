@@ -9,8 +9,15 @@ enum States{
     INVENTORY,
     CREATE_CHARACTER,
     BATTLE,
-    LEAVE,
     CATCH,
+    REWARD,
+    
+    LEAVE,
+}; // LEAVE SHALL ALWAYS BE LAST
+
+enum BattleType{
+    EXPLORATION,
+    DUNGEON
 };
 
 class State{

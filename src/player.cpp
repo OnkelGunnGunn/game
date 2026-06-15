@@ -33,3 +33,13 @@ void Player::clear_monsters()
 {
     monsters.clear();
 }
+
+void Player::add_item(const Item &item)
+{
+    item_inventory.push_back(item);
+}
+
+std::vector<Item> &Player::get_inventory()
+{
+    return item_inventory;
+}

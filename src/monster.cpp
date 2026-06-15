@@ -24,3 +24,36 @@ void Monster::abandon()
     this->hp = 0;
     this->damage = 0;
 }
+
+void Monster::add_status(const Status& status)
+{
+    statuses.push_back(status);
+}
+
+
+void Monster::apply_statuses()
+{
+    for (auto& s : statuses)
+    {
+        s.apply(*this);
+        s.decrease_duration();
+    }
+
+    // remove expired statuses
+    statuses.erase(
+        std::remove_if(statuses.begin(), statuses.end(),
+            [](Status& s) { return s.is_expired(); }),
+        statuses.end()
+    );
+}
+
+
+void Monster::add_item(const Item& item)
+{
+    items.push_back(item);
+}
+
+std::vector<Item> &Monster::get_items()
+{
+    return items;
+}

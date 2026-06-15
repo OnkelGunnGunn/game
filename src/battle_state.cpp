@@ -100,6 +100,7 @@ int BattleState::battle()
         {
         case PC:
         {
+            // player_monsters[i_player].apply_statuses();
             std::cout << "Player Monster health:" << std::endl;
             print_health(player_monsters,i_player);
             spacing();
@@ -163,6 +164,7 @@ int BattleState::battle()
 
         case OPPONENT:
         {   clear_screen();
+            enemy_monsters[i_enemy].apply_statuses();
             std::cout << "enemy attacking" << std::endl;
             std::cout << enemy_monsters[i_enemy].name << " dealt "
                       << enemy_monsters[i_enemy].damage << " to "

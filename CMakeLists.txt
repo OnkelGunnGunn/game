@@ -16,6 +16,8 @@ add_executable(game
     src/player.cpp
     src/ExploreState.cpp
     src/catch_state.cpp
+    src/item.cpp
+    src/status.cpp
     )
 
 

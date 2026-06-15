@@ -14,11 +14,11 @@ void InventoryState::on_entry()
     std::cout << "Monsters in your Party" << std::endl;
     for (size_t i = 0; i < data.player.get_all_monsters().size(); ++i)
     {
-        std::cout << i + 1 << ". " << data.player.get_all_monsters()[i].name << std::endl;
+        std::cout << i + 1 << ". " << data.player.get_all_monsters()[i].name << "       (HP: " << data.player.get_all_monsters()[i].hp << "  DMG: " << data.player.get_all_monsters()[i].damage << ")" << std::endl;
     }
 
     std::cout << "Choose option:" << std::endl;  
-    std::cout << "0. Swap order of monsters      1. Give Item to monster       2. Leave inventory" << std::endl;
+    std::cout << "0. Swap order of monsters            2. Leave inventory" << std::endl;
 }
 
 

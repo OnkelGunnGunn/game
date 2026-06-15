@@ -20,10 +20,10 @@ int CreateCharacterState::evaluate_user_input(int user_input)
         std::cin >> new_name;
         data.player.set_name(new_name);
         data.player.clear_monsters();
-        data.player.add_monster(Monster("horse1", 4, 1));
-        data.player.add_monster(Monster("horse2", 4, 1));
-        data.player.add_monster(Monster("none", 0, 0));
-        data.player.add_monster(Monster("none", 0, 0));
+        data.player.add_monster(Monster("STARTER horse1", 4, 1));
+        data.player.add_monster(Monster("STARTER horse2", 4, 1));
+        data.player.add_monster(Monster("STARTER horse3", 4, 1));
+        data.player.add_monster(Monster("STARTER horse4", 4, 1));
         break;
     
     case LEAVE_CHAR_CREATION:

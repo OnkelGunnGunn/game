@@ -6,9 +6,9 @@
 enum States{
     START,
     EXPLORE,
-    BATTLE,
     INVENTORY,
     CREATE_CHARACTER,
+    BATTLE,
     LEAVE,
     CATCH,
 };

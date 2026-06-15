@@ -8,9 +8,11 @@ enum States{
     EXPLORE,
     INVENTORY,
     CREATE_CHARACTER,
+    SAVE,
     BATTLE,
     CATCH,
     REWARD,
+    
     
     LEAVE,
 }; // LEAVE SHALL ALWAYS BE LAST

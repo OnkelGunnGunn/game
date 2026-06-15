@@ -14,15 +14,15 @@ Monster ExploreState::weighted_random_monster()
         { Monster("Drage", 100, 10), 1 }
     };
 
-    // ✅ Step 1: total weight
+
     int total_weight = 0;
     for (const auto& entry : table)
         total_weight += entry.weight;
 
-    // ✅ Step 2: random number
+
     int r = rng(1, total_weight);
 
-    // ✅ Step 3: find monster
+
     int cumulative = 0;
     for (const auto& entry : table)
     {

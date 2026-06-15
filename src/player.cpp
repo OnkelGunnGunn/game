@@ -2,6 +2,7 @@
 
 Player::Player() : name("Default Player")
 {
+    
 }
 
 void Player::set_name(std::string &new_name)

@@ -19,6 +19,7 @@ add_executable(game
     src/item.cpp
     src/status.cpp
     src/dungeon.cpp
+    src/game_data.cpp
     )
 
 

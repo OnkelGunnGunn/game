@@ -8,8 +8,9 @@
 
 startState::startState(GameData &data) : data(data)
 {
-    data.player.add_monster(Monster("Player's HEST 1", 4, 1));
-    data.player.add_monster(Monster("player's HEST 2", 4, 1));
+    
+    data.player.add_monster(Monster("Hest", 4, 1));
+    data.player.add_monster(Monster("Hest", 4, 1));
     data.player.add_monster(Monster());
     data.player.add_monster(Monster());
     
@@ -17,13 +18,14 @@ startState::startState(GameData &data) : data(data)
 
 void startState::on_entry()
 {
-    clear_screen();
+    // clear_screen();
     std::cout << "Hello " << data.player.get_name() << ", choose an option." << std::endl;
     std::cout << std::endl;
     std::cout << "which action do you want to take" << std::endl;
     std::cout << "1. explore" << std::endl;
     std::cout << "2. check monsters" << std::endl;
     std::cout << "3. Create new character" << std::endl;
+    std::cout << "4. Save game" << std::endl;
     std::cout << LEAVE << ". Leave Game" << std::endl;
 }
 
@@ -47,6 +49,12 @@ int startState::evaluate_user_input(int user_input)
         case LEAVE:
         new_state = LEAVE;
         break;
+
+        case SAVE:
+        db_interface.save_game_data(data.player);
+        new_state = START;
+        break;
+
 
         default:
         new_state = START;

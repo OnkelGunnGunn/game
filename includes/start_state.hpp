@@ -7,7 +7,7 @@
 class startState : public State{
     private:
     GameData& data;
-
+    Database_interface db_interface;
 
     public:
     startState(GameData& data);

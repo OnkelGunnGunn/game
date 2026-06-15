@@ -7,6 +7,7 @@
 #include "player.hpp"
 #include "npc.hpp"
 #include "item.hpp"
+#include "dungeon.hpp"
 
 struct GameData {
     Player player;
@@ -14,7 +15,10 @@ struct GameData {
     Monster loot_monster;
     bool can_catch = false;
 
+    Dungeon current_dungeon;
+
     Item item_reward;
+    bool has_reward = false;
 
     BattleType battle_type;
 };

@@ -18,6 +18,7 @@ add_executable(game
     src/catch_state.cpp
     src/item.cpp
     src/status.cpp
+    src/dungeon.cpp
     )
 
 

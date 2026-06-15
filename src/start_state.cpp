@@ -24,7 +24,7 @@ void startState::on_entry()
     std::cout << "1. explore" << std::endl;
     std::cout << "2. check monsters" << std::endl;
     std::cout << "3. Create new character" << std::endl;
-    std::cout << "5. Leave Game" << std::endl;
+    std::cout << LEAVE << ". Leave Game" << std::endl;
 }
 
 int startState::evaluate_user_input(int user_input)
